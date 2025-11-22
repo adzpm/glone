@@ -1,0 +1,30 @@
+version: '3'
+
+silent: false
+
+vars:
+  _BINNAME: "glup"
+  _BINDIR: "bin"
+
+tasks:
+  default:
+    desc: run all
+    cmds:
+      - task: build
+      - task: test
+      - task: lint
+
+  build:
+    desc: build
+    cmds:
+      - go build -o {{ ._BINDIR }}/{{ ._BINNAME }} -v .
+
+  test:
+    desc: run all tests
+    cmds:
+      - go test -count 10 -timeout 1m -race -v ./...
+
+  lint:
+    desc: run all linters
+    cmds:
+      - golangci-lint run
