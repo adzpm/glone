@@ -4,12 +4,12 @@ import (
 	"io"
 	"os"
 
-	"github.com/charmbracelet/log"
+	"github.com/adzpm/glup/internal/logger"
 )
 
 // ClonerOptions holds cloner configuration options
 type ClonerOptions struct {
-	Logger      *log.Logger
+	Logger      logger.Logger
 	ProgressOut io.Writer
 }
 
@@ -17,9 +17,9 @@ type ClonerOptions struct {
 type ClonerOption func(*ClonerOptions)
 
 // WithLogger sets the logger
-func WithLogger(logger *log.Logger) ClonerOption {
+func WithLogger(lgr logger.Logger) ClonerOption {
 	return func(o *ClonerOptions) {
-		o.Logger = logger
+		o.Logger = lgr
 	}
 }
 

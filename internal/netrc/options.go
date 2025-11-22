@@ -4,12 +4,12 @@ import (
 	"os/user"
 	"path/filepath"
 
-	"github.com/charmbracelet/log"
+	logger "github.com/adzpm/glup/internal/logger"
 )
 
 // LoaderOptions holds netrc loader configuration options
 type LoaderOptions struct {
-	Logger    *log.Logger
+	Logger    logger.Logger
 	NetrcPath string
 }
 
@@ -17,9 +17,9 @@ type LoaderOptions struct {
 type LoaderOption func(*LoaderOptions)
 
 // WithLogger sets the logger
-func WithLogger(logger *log.Logger) LoaderOption {
+func WithLogger(lgr logger.Logger) LoaderOption {
 	return func(o *LoaderOptions) {
-		o.Logger = logger
+		o.Logger = lgr
 	}
 }
 

@@ -1,7 +1,7 @@
 package git
 
 import (
-	"github.com/charmbracelet/log"
+	"github.com/adzpm/glup/internal/logger"
 	gitlab "gitlab.com/gitlab-org/api/client-go"
 )
 
@@ -12,7 +12,7 @@ type CloneResult struct {
 }
 
 // CloneProject clones a GitLab project to the target directory (legacy function for backward compatibility)
-func CloneProject(project *gitlab.Project, targetDir string, token string, logger *log.Logger) (bool, error) {
-	cloner := NewCloner(WithLogger(logger))
+func CloneProject(project *gitlab.Project, targetDir string, token string, lgr logger.Logger) (bool, error) {
+	cloner := NewCloner(WithLogger(lgr))
 	return cloner.CloneProject(project, targetDir, token)
 }

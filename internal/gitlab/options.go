@@ -1,12 +1,12 @@
 package gitlab
 
 import (
-	"github.com/charmbracelet/log"
+	"github.com/adzpm/glup/internal/logger"
 )
 
 // ClientOptions holds GitLab client configuration options
 type ClientOptions struct {
-	Logger   *log.Logger
+	Logger   logger.Logger
 	BaseURL  string
 	SkipAuth bool
 }
@@ -15,9 +15,9 @@ type ClientOptions struct {
 type ClientOption func(*ClientOptions)
 
 // WithLogger sets the logger
-func WithLogger(logger *log.Logger) ClientOption {
+func WithLogger(lgr logger.Logger) ClientOption {
 	return func(o *ClientOptions) {
-		o.Logger = logger
+		o.Logger = lgr
 	}
 }
 
