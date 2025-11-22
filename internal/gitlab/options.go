@@ -1,7 +1,7 @@
 package gitlab
 
 import (
-	"github.com/adzpm/glup/internal/logger"
+	logger "github.com/adzpm/glup/internal/logger"
 )
 
 // ClientOptions holds GitLab client configuration options

@@ -3,8 +3,9 @@ package gitlab
 import (
 	"fmt"
 
-	"github.com/adzpm/glup/internal/config"
 	gitlab "gitlab.com/gitlab-org/api/client-go"
+
+	config "github.com/adzpm/glup/internal/config"
 )
 
 // Client wraps GitLab API client

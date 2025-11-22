@@ -1,6 +1,8 @@
 package config
 
-import "errors"
+import (
+	"errors"
+)
 
 var (
 	ErrMissingGitLabHost  = errors.New("gitlab-host is required")

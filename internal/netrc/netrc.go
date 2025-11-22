@@ -5,7 +5,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/jdx/go-netrc"
+	netrc "github.com/jdx/go-netrc"
 
 	config "github.com/adzpm/glup/internal/config"
 )
