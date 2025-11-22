@@ -14,12 +14,15 @@ func (c *Config) Validate() error {
 	if c.GitLabHost == "" {
 		return ErrMissingGitLabHost
 	}
+
 	if c.GitLabUser == "" {
 		return ErrMissingGitLabUser
 	}
+
 	if c.GitLabToken == "" {
 		return ErrMissingGitLabToken
 	}
+
 	return nil
 }
 
@@ -28,12 +31,15 @@ func (c *Config) Merge(other *Config) {
 	if other == nil {
 		return
 	}
+
 	if c.GitLabHost == "" && other.GitLabHost != "" {
 		c.GitLabHost = other.GitLabHost
 	}
+
 	if c.GitLabUser == "" && other.GitLabUser != "" {
 		c.GitLabUser = other.GitLabUser
 	}
+
 	if c.GitLabToken == "" && other.GitLabToken != "" {
 		c.GitLabToken = other.GitLabToken
 	}
