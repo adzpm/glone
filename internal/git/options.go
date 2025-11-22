@@ -1,0 +1,39 @@
+package git
+
+import (
+	"io"
+	"os"
+
+	"github.com/charmbracelet/log"
+)
+
+// ClonerOptions holds cloner configuration options
+type ClonerOptions struct {
+	Logger      *log.Logger
+	ProgressOut io.Writer
+}
+
+// ClonerOption is a function that modifies ClonerOptions
+type ClonerOption func(*ClonerOptions)
+
+// WithLogger sets the logger
+func WithLogger(logger *log.Logger) ClonerOption {
+	return func(o *ClonerOptions) {
+		o.Logger = logger
+	}
+}
+
+// WithProgressOutput sets the progress output writer
+func WithProgressOutput(w io.Writer) ClonerOption {
+	return func(o *ClonerOptions) {
+		o.ProgressOut = w
+	}
+}
+
+// defaultClonerOptions returns default cloner options
+func defaultClonerOptions() *ClonerOptions {
+	return &ClonerOptions{
+		Logger:      nil,
+		ProgressOut: os.Stdout,
+	}
+}

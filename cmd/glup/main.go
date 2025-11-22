@@ -34,7 +34,11 @@ func cloneCommand(ctx context.Context, cmd *cli.Command) error {
 	}
 
 	// Load credentials from .netrc if not specified via flags
-	netrcCfg, err := netrc.LoadCredentials(lgr)
+	netrcLoader, err := netrc.NewLoader(netrc.WithLogger(lgr))
+	if err != nil {
+		return fmt.Errorf("error creating netrc loader: %w", err)
+	}
+	netrcCfg, err := netrcLoader.LoadCredentials()
 	if err != nil {
 		return fmt.Errorf("error loading .netrc: %w", err)
 	}
@@ -50,7 +54,7 @@ func cloneCommand(ctx context.Context, cmd *cli.Command) error {
 	}
 
 	// Create GitLab client
-	client, err := gitlab.NewClient(cfg, lgr)
+	client, err := gitlab.NewClient(cfg, gitlab.WithLogger(lgr))
 	if err != nil {
 		return err
 	}
@@ -74,8 +78,11 @@ func cloneCommand(ctx context.Context, cmd *cli.Command) error {
 	skipCount := 0
 	errorCount := 0
 
+	// Create cloner
+	cloner := git.NewCloner(git.WithLogger(lgr))
+
 	for _, project := range projects {
-		skipped, err := git.CloneProject(project, cfg.TargetDir, cfg.GitLabToken, lgr)
+		skipped, err := cloner.CloneProject(project, cfg.TargetDir, cfg.GitLabToken)
 		if err != nil {
 			lgr.Errorf("Error cloning %s: %v", project.Name, err)
 			errorCount++
