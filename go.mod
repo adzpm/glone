@@ -7,7 +7,7 @@ require (
 	github.com/go-git/go-git/v5 v5.16.3
 	github.com/jdx/go-netrc v1.0.0
 	github.com/urfave/cli/v3 v3.6.1
-	github.com/xanzy/go-gitlab v0.115.0
+	gitlab.com/gitlab-org/api/client-go v0.160.1
 )
 
 require (
